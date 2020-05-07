@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-
 class Counter extends Component {
   state = {
     value: this.props.value,
@@ -16,8 +15,8 @@ class Counter extends Component {
     return (
       // instead of div, use this to aviod adding another div
       <React.Fragment>
-        <div className='row'>
-          <div className='col'>
+        <div className="row">
+          <div className="col">
             <button
               onClick={this.handleInc}
               style={this.state.styles}

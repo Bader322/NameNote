@@ -6,11 +6,11 @@ class NavBar extends Component {
     state = {  }
     render() { 
         return (    
-        <div className="container">
+        <div className="container-fluid">
             <div className="row">
-                <div className="col">
+                <div className="col-md">
                     <div id="topBar">
-                        <nav className="navbar navbar-expand-lg navbar-dark primary-color">
+                        <nav className="navbar">
                             <ul>
                                 <li>
                                    <a href=""> <FontAwesomeIcon icon={faMusic} size="lg"/><span id='title'>NameNote</span></a>
