@@ -1,39 +1,40 @@
 import React, { Component } from "react";
 import Vex from "vexflow";
 const VF = Vex.Flow;
-let vf = null;
+
+// Render voice
+// **********************
+var div = document.getElementById("boo");
+var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+
+// Create a stave of width 400 at position 10, 40 on the canvas.
+var stave = new VF.Stave(10, 40, 400);
+// Configure the rendering context.
+renderer.resize(450, 250);
+
+var context = renderer.getContext();
+context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
+
+//************ */ call draw
+
 class Staff extends Component {
   state = {
+    prepDraw: () => {},
+
     draw: () => {
-      // Create a VexFlow renderer attaced to the DIV element "boo"
-      vf = new VF.Factory({ renderer: { elementId: "boo" } });
-      let score = vf.EasyScore();
-      let system = vf.System();
+      context.clear();
 
-      this.state.placeNotes(system, score);
-      // Create a 4/4 treble stave, and add two parallel voices
+      stave = new VF.Stave(10, 40, 400);
 
-      // Draw it!
-      vf.draw();
-      console.log();
-    },
-    clear: () => {},
-
-    placeNotes: (system, score) => {
-      system
-        .addStave({
-          voices: [
-            // whole note to cover entire measure
-            // repreesnts a choice
-
-            score.voice(score.notes(this.getNote())),
-          ],
-        })
-        .addClef("treble");
+      // Add a clef and time signature.
+      stave.addClef("treble");
+      var voice = this.getNote();
+      // Connect it to the rendering context and draw!
+      stave.setContext(context).draw();
+      voice.draw(context, stave);
     },
 
-    gameResults: [0, 0],
-    keyMapper: ["4/w", "3/w"],
+    keyMapper: ["/4", "/5"],
     noteOnKeyBoard: [
       //   Natural, sharps, flats respectively
       "a",
@@ -59,18 +60,31 @@ class Staff extends Component {
       // "gb",
     ],
   };
-  getNote() {
+  getRandomNotes = () => {
+    // a,b,c,d,e,f,g **** no accidentals yet
     let { noteOnKeyBoard } = this.state;
+    let { keyMapper } = this.state;
     let randomNote =
       noteOnKeyBoard[Math.floor(Math.random() * noteOnKeyBoard.length)];
-    let { keyMapper } = this.state;
 
     let keyMapperRandom =
       keyMapper[Math.floor(Math.random() * keyMapper.length)];
-    randomNote += keyMapperRandom;
-    console.log(randomNote);
 
-    return randomNote;
+    return randomNote + keyMapperRandom;
+  };
+  getNote() {
+    let randomNote = this.getRandomNotes();
+    console.log(randomNote);
+    var notes = [
+      // A quarter-note C.
+      new VF.StaveNote({ keys: [randomNote], duration: "q" }),
+    ];
+    // Create a voice in 4/4 and add above notes
+    var voice = new VF.Voice({ num_beats: 1, beat_value: 4 });
+    voice.addTickables(notes);
+    // Format and justify the notes to 400 pixels.
+    var formatter = new VF.Formatter().joinVoices([voice]).format([voice], 400);
+    return voice;
   }
 
   render() {
