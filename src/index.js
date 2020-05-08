@@ -2,6 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./Index.css";
 import "bootstrap/dist/css/bootstrap.css";
-import Main from "./components/main";
+import App from "./components/App";
 
-ReactDOM.render(<Main />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));

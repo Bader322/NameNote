@@ -34,6 +34,13 @@ class Counter extends Component {
             <p className={this.getBadgeColor()} style={this.state.styles}>
               {this.formatCount()}
             </p>
+            <button
+              onClick={this.props.onDelete}
+              style={this.state.styles}
+              className="btn btn-danger m-3 "
+            >
+              Delete
+            </button>
           </div>
         </div>
       </React.Fragment>
