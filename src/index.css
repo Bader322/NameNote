@@ -1,5 +1,11 @@
+.totalCounters {
+  margin-left: 20px;
+  float: right;
+  text-align: center;
+}
+
 .navbar {
-  outline: black 2px solid;
+  /* outline: black 2px solid; */
 }
 
 .container {

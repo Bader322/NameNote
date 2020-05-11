@@ -1,25 +1,24 @@
 import React, { Component } from "react";
 import Counter from "./counter";
 class Counters extends Component {
-  state = {
-    counters: [
-      { id: 1, value: 3 },
-      { id: 2, value: 0 },
-      { id: 3, value: 0 },
-    ],
-  };
-  handleDelete = (counterId) => {
-    console.log("Delete clicked!");
-  };
-
   render() {
     return (
       <div>
-        {this.state.counters.map((counter) => (
+        <button
+          className="btn btn-secondary btn-sm m-3"
+          onClick={() => this.props.onReset()}
+        >
+          Reset
+        </button>
+
+        {this.props.counters.map((counter) => (
           <Counter
             key={counter.id}
-            value={counter.value}
-            onDelete={this.handleDelete}
+            counter={counter}
+            onDecrement={() => this.props.onDecrement(counter)}
+            onIncrement={() => this.props.onIncrement(counter)}
+            onDelete={() => this.props.onDelete(counter.id)}
+            // getBadgeColor={this.getBadgeColor}
           />
         ))}
       </div>
@@ -28,3 +27,4 @@ class Counters extends Component {
 }
 
 export default Counters;
+// 1140

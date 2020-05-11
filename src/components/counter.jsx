@@ -1,42 +1,38 @@
 import React, { Component } from "react";
-
+// controlled component, one that does not carry its own state
 class Counter extends Component {
-  state = {
-    value: this.props.value,
-    styles: {
-      fontWeight: "bold",
-      fontSize: 25,
-    },
-  };
-
   //   dynamic classes
+  styles = {
+    fontWeight: "bold",
+    fontSize: "24px",
+  };
 
   render() {
     return (
       // instead of div, use this to aviod adding another div
       <React.Fragment>
         <div className="row">
-          <div className="col">
+          <div className="col ">
             <button
-              onClick={this.handleInc}
-              style={this.state.styles}
+              onClick={() => this.props.onIncrement(this.props.counter)}
+              style={this.styles}
               className="btn btn-primary m-3 "
             >
               Inc
             </button>
             <button
-              onClick={this.handleDec}
-              style={this.state.styles}
+              onClick={() => this.props.onDecrement(this.props.counter)}
+              style={this.styles}
               className="btn btn-primary m-3 "
             >
               Dec
             </button>
-            <p className={this.getBadgeColor()} style={this.state.styles}>
+            <p className={this.getBadgeColor()} style={this.styles}>
               {this.formatCount()}
             </p>
             <button
-              onClick={this.props.onDelete}
-              style={this.state.styles}
+              onClick={() => this.props.onDelete(this.props.counter.id)}
+              style={this.styles}
               className="btn btn-danger m-3 "
             >
               Delete
@@ -46,27 +42,14 @@ class Counter extends Component {
       </React.Fragment>
     );
   }
-  // handle decrement
-  handleDec = () => {
-    this.setState({ value: this.state.value - 1 });
-    if (this.state.value <= 0) {
-      return this.setState({ value: (this.setState.value = 0) });
-    }
-  };
-
-  // handle increment
-  handleInc = () => {
-    this.setState({ value: this.state.value + 1 });
-  };
-
-  getBadgeColor() {
+  getBadgeColor = () => {
     let classes = "badge m-3 badge-";
-    classes += this.state.value === 0 ? "warning" : "danger";
-    return classes;
-  }
+    classes += this.props.counter.value === 0 ? "warning" : "danger";
 
+    return classes;
+  };
   formatCount() {
-    const { value } = this.state;
+    const { value } = this.props.counter;
     return value === 0 ? "Zero" : value;
   }
 }
