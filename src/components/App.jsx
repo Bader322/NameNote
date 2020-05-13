@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Counters from "./counters";
 import NavBar from "./navBar";
-import Staff from "./staff";
+import Questions from "./questions";
 
 export default class main extends Component {
   state = {
@@ -83,7 +83,7 @@ export default class main extends Component {
           onDelete={this.handleDelete}
           counters={this.state.counters}
         /> */}
-        <Staff />
+        <Questions />
       </React.Fragment>
     );
   }
