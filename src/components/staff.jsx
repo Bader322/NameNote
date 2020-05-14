@@ -14,9 +14,6 @@ context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
 
 class Staff extends Component {
   draw = (nextNote, wrongNotes) => {
-    console.log("current nNote: ", nextNote[0]);
-    console.log("current wNotes: ", wrongNotes);
-
     context.clear();
 
     const voice = new VF.Voice({ num_beats: 1, beat_value: 4 });
@@ -36,23 +33,36 @@ class Staff extends Component {
   };
 
   render() {
-    console.log("this.note In render: ", this.props.nextNote);
-
     return (
       <div>
         <div>
           <button
+            style={this.props.style}
+            id="playButton"
             onClick={() => {
               this.draw(this.props.nextNote, this.props.wrongNotes);
+              this.props.playButtonStyle();
 
               // display buttons of choices
-              this.props.getRandomNotes();
             }}
           >
             Play
           </button>
-          {this.props.wrongNotes.map((wrongNote) => {
-            return <button key={wrongNote}>{wrongNote}</button>;
+          <div></div>
+          {this.props.notesOnKeyBoard.map((noteOnKeyBoard) => {
+            return (
+              <button
+                key={noteOnKeyBoard}
+                id={noteOnKeyBoard}
+                onClick={() => {
+                  this.props.checkAnswer(this.props.nextNote[0]);
+                  this.props.getRandomNotes();
+                  this.draw(this.props.nextNote, this.props.wrongNotes);
+                }}
+              >
+                {noteOnKeyBoard}
+              </button>
+            );
           })}
         </div>
       </div>

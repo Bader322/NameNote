@@ -1,25 +1,33 @@
 import React, { Component } from "react";
 import Staff from "./staff";
 class Questions extends Component {
-  state = {
-    keyMapper: ["/3", "/4", "/5", "/6"],
-    noteOnKeyBoard: [
-      //   Natural, sharps, flats respectively
-      "a",
-      "b",
-      "c",
-      "d",
-      "e",
-      "f",
-      "g",
-    ],
-    nextNote: "a/4",
-    wrongNotes: ["b", "c", "d", "e", "f", "g"],
-    answer: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      keyMapper: ["/3", "/4", "/5", "/6"],
+      notesOnKeyBoard: [
+        //   Natural, sharps, flats respectively
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+      ],
+      nextNote: "a/4",
+      wrongNotes: ["b", "c", "d", "e", "f", "g"],
+      answer: "",
+      style: {
+        display: "block",
+      },
+    };
+  }
 
   wrongNotes = (nextNote) => {
-    const wrongNotes = this.state.noteOnKeyBoard.filter(function (currentNote) {
+    const wrongNotes = this.state.notesOnKeyBoard.filter(function (
+      currentNote
+    ) {
       return currentNote !== nextNote;
     });
     return wrongNotes;
@@ -27,24 +35,21 @@ class Questions extends Component {
 
   getRandomNotes = () => {
     // a,b,c,d,e,f,g **** no accidentals yet
-    let { noteOnKeyBoard } = this.state;
+    let { notesOnKeyBoard } = this.state;
     let { keyMapper } = this.state;
     let randomNote =
-      noteOnKeyBoard[Math.floor(Math.random() * noteOnKeyBoard.length)];
-    console.log("In getRandomNotes");
+      notesOnKeyBoard[Math.floor(Math.random() * notesOnKeyBoard.length)];
+
     let keyMapperRandom =
       keyMapper[Math.floor(Math.random() * keyMapper.length)];
     // return key format ie. "c/4" is middle c on the piano
     let nextNote = randomNote + keyMapperRandom;
-    let wrongNotes = this.wrongNotes(randomNote);
-    this.setState({ nextNote: nextNote, wrongNotes: wrongNotes });
+    this.setState({ nextNote: nextNote });
   };
-
-  renderChoices = (correctAnswer) => {
-    let { noteOnKeyBoard } = this.state;
-    let index = noteOnKeyBoard.indexOf(correctAnswer);
-    if (noteOnKeyBoard[index] === correctAnswer) console.log("its correct");
-    else console.log("wrong answer");
+  playButtonStyle = () => {
+    let style = { ...this.state.playButtonStyle };
+    style.display = "none";
+    this.setState({ style: style });
   };
 
   render() {
@@ -56,7 +61,10 @@ class Questions extends Component {
           wrongNotes={this.state.wrongNotes}
           // getChoices={this.getChoices}
           keyMapper={this.state.keyMapper}
-          noteOnKeyBoard={this.state.noteOnKeyBoard}
+          notesOnKeyBoard={this.state.notesOnKeyBoard}
+          checkAnswer={this.checkAnswer}
+          playButtonStyle={this.playButtonStyle}
+          style={this.state.style}
         />
       </React.Fragment>
     );
