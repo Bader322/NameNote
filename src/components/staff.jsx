@@ -43,6 +43,7 @@ class Staff extends Component {
       <div>
         <div className="board">
           <button
+          className="btn btn-primary"
             style={this.props.style}
             id="playButton"
             onClick={() => {
@@ -52,7 +53,7 @@ class Staff extends Component {
               // display buttons of choices
             }}
           >
-            Play
+            NameNote
           </button>
           <div style={this.props.keysStyle}>
             {" "}
@@ -65,9 +66,9 @@ class Staff extends Component {
 
           {this.props.notesOnKeyBoardKeys.map((notesOnKeyBoardKey) => {
             return (
-              <div>
+              <div key={notesOnKeyBoardKey}>
                 <button
-                  className="board"
+                  className="badge badge-light m-1"
                   style={this.props.keysStyle}
                   key={notesOnKeyBoardKey}
                   id={notesOnKeyBoardKey}
@@ -78,7 +79,7 @@ class Staff extends Component {
                     this.props.getRandomNotes();
                   }}
                 >
-                  {notesOnKeyBoardKey}
+                  <span>{notesOnKeyBoardKey}</span>
                 </button>
               </div>
             );

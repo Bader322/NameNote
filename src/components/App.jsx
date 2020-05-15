@@ -71,18 +71,18 @@ export default class main extends Component {
   render() {
     return (
       <React.Fragment>
-        {/* <NavBar
+         <NavBar
           summedCounters={this.summedCounters()}
           countersOn={this.countersOn()}
         />
 
-        <Counters
+        {/* // <Counters
           onReset={this.handleReset}
           onDecrement={this.handleDec}
           onIncrement={this.handleInc}
           onDelete={this.handleDelete}
           counters={this.state.counters}
-        /> */}
+        /> } */}
         <Question />
       </React.Fragment>
     );

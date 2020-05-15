@@ -16,10 +16,15 @@
 .board {
   display: flex;
   justify-content: center;
-  flex-direction: row;
+  /* flex-flow: row; */
 
   /* flex-wrap: wrap; */
 }
+button {
+  font-size: large;
+  /* border:0; */
+}
+
 
 #title {
   font-size: 19px;

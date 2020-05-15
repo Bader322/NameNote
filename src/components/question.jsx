@@ -20,6 +20,7 @@ class Question extends Component {
       keysStyle: { display: "none" },
       oldNote: randN,
       score: 0,
+      
     };
   }
 
