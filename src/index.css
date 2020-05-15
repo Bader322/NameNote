@@ -4,17 +4,23 @@
   text-align: center;
 }
 
-.navbar {
+#outerLayer {
+  font-weight: bold;
+  font-size: large;
   /* outline: black 2px solid; */
 }
-
 .container {
-  margin-top: 20px;
+  margin: 30px;
 }
 
-.container-fluid {
-  margin-top: 20px;
+.board {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+
+  /* flex-wrap: wrap; */
 }
+
 #title {
   font-size: 19px;
   margin-left: 2px;

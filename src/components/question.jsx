@@ -55,13 +55,19 @@ class Question extends Component {
 
     // compare oldNote to what is picked for an answer
     if (choiceNoteClicked === oldNote) {
-      score = score + 1;
-      this.setState({ score: score });
+      this.setState({ score: score + 1 }, () =>
+        console.log("Score:", this.state.score)
+      );
+      console.log("Correct!");
     } else {
       // Wrong answer
+      console.log("Wrong answer!");
+      console.log("Score:", this.state.score);
     }
   };
-
+  componentDidUpdate(prevProps, prevState) {
+    console.log("prevState:", prevState);
+  }
   render() {
     return (
       <Questions

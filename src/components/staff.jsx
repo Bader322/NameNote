@@ -37,11 +37,11 @@ class Staff extends Component {
     voice.draw(context, stave);
     // renderChoices
   };
-  componentDidUpdate(prevProps, prevState) {}
+
   render() {
     return (
       <div>
-        <div>
+        <div className="board">
           <button
             style={this.props.style}
             id="playButton"
@@ -54,22 +54,33 @@ class Staff extends Component {
           >
             Play
           </button>
-          <div></div>
+          <div style={this.props.keysStyle}>
+            {" "}
+            <span className="badge badge-primary " id="outerLayer">
+              {" "}
+              Score:{" "}
+              <span className="badge badge-light"> {this.props.score}</span>
+            </span>{" "}
+          </div>
+
           {this.props.notesOnKeyBoardKeys.map((notesOnKeyBoardKey) => {
             return (
-              <button
-                style={this.props.keysStyle}
-                key={notesOnKeyBoardKey}
-                id={notesOnKeyBoardKey}
-                onClick={() => {
-                  this.props.checkAnswer(notesOnKeyBoardKey);
+              <div>
+                <button
+                  className="board"
+                  style={this.props.keysStyle}
+                  key={notesOnKeyBoardKey}
+                  id={notesOnKeyBoardKey}
+                  onClick={() => {
+                    this.props.checkAnswer(notesOnKeyBoardKey);
 
-                  this.draw();
-                  this.props.getRandomNotes();
-                }}
-              >
-                {notesOnKeyBoardKey}
-              </button>
+                    this.draw();
+                    this.props.getRandomNotes();
+                  }}
+                >
+                  {notesOnKeyBoardKey}
+                </button>
+              </div>
             );
           })}
         </div>
