@@ -13,7 +13,14 @@ var context = renderer.getContext();
 context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
 
 class Staff extends Component {
-  draw = (nextNote, wrongNotes) => {
+  draw = () => {
+    // Letter note
+
+    // "/3", "/4", "/5", "/6" key mappings on staff
+    console.log("randomNote in draw : ", this.props.randomNote);
+    let { keyMapper } = this.props;
+    let nextNote = this.props.randomNote + keyMapper;
+
     context.clear();
 
     const voice = new VF.Voice({ num_beats: 1, beat_value: 4 });
@@ -31,8 +38,9 @@ class Staff extends Component {
     voice.draw(context, stave);
     // renderChoices
   };
-
+  componentDidUpdate(prevProps, prevState) {}
   render() {
+    const randomNote = this.props.randomNote;
     return (
       <div>
         <div>
@@ -40,7 +48,7 @@ class Staff extends Component {
             style={this.props.style}
             id="playButton"
             onClick={() => {
-              this.draw(this.props.nextNote, this.props.wrongNotes);
+              this.draw();
               this.props.playButtonStyle();
 
               // display buttons of choices
@@ -49,18 +57,19 @@ class Staff extends Component {
             Play
           </button>
           <div></div>
-          {this.props.notesOnKeyBoard.map((noteOnKeyBoard) => {
+          {this.props.notesOnKeyBoardKeys.map((notesOnKeyBoardKey) => {
             return (
               <button
-                key={noteOnKeyBoard}
-                id={noteOnKeyBoard}
+                key={notesOnKeyBoardKey}
+                id={notesOnKeyBoardKey}
                 onClick={() => {
-                  this.props.checkAnswer(this.props.nextNote[0]);
+                  this.props.checkAnswer(notesOnKeyBoardKey, randomNote);
+
+                  this.draw();
                   this.props.getRandomNotes();
-                  this.draw(this.props.nextNote, this.props.wrongNotes);
                 }}
               >
-                {noteOnKeyBoard}
+                {notesOnKeyBoardKey}
               </button>
             );
           })}

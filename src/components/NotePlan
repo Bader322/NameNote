@@ -1,0 +1,8 @@
+function thisOne() {
+clear display
+add note
+ask question
+get answer
+check answer
+thisOne()
+}
