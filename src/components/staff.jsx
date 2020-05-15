@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Vex from "vexflow";
-
 const VF = Vex.Flow;
 
 var div = document.getElementById("boo");
@@ -40,7 +39,6 @@ class Staff extends Component {
   };
   componentDidUpdate(prevProps, prevState) {}
   render() {
-    const randomNote = this.props.randomNote;
     return (
       <div>
         <div>
@@ -60,10 +58,11 @@ class Staff extends Component {
           {this.props.notesOnKeyBoardKeys.map((notesOnKeyBoardKey) => {
             return (
               <button
+                // oldNote={this.props.randomNote}
                 key={notesOnKeyBoardKey}
                 id={notesOnKeyBoardKey}
                 onClick={() => {
-                  this.props.checkAnswer(notesOnKeyBoardKey, randomNote);
+                  this.props.checkAnswer(notesOnKeyBoardKey);
 
                   this.draw();
                   this.props.getRandomNotes();
