@@ -6,21 +6,22 @@ class Question extends Component {
   constructor(props) {
     super(props);
 
+    let randN =
+      notesOnKeyBoardKeys[
+        Math.floor(Math.random() * notesOnKeyBoardKeys.length)
+      ];
     this.state = {
       keyMapper: ["/4", "/5", "/6"],
-      randomNote:
-        notesOnKeyBoardKeys[
-          Math.floor(Math.random() * notesOnKeyBoardKeys.length)
-        ],
-      answer: "",
+      randomNote: randN,
       notesOnKeyBoardKeys: notesOnKeyBoardKeys,
       style: {
-        display: "block",
+        display: "",
       },
-      oldNote: this.randomNote,
+      keysStyle: { display: "none" },
+      oldNote: randN,
+      score: 0,
     };
   }
-  state = {};
 
   getRandomNotes = () => {
     this.setState({ oldNote: this.state.randomNote });
@@ -40,13 +41,25 @@ class Question extends Component {
     this.setState({ nextNote: nextNote, randomNote: randomNote });
   };
   playButtonStyle = () => {
-    let style = { ...this.state.playButtonStyle };
+    let style = { ...this.state.style };
+    let keysStyle = { ...this.state.keysStyle };
     style.display = "none";
-    this.setState({ style: style });
+    keysStyle.display = "";
+    this.setState({ style: style, keysStyle: keysStyle });
   };
   checkAnswer = (choiceNoteClicked) => {
+    let { oldNote } = this.state;
+    let score = this.state.score;
+
     console.log("clicked: ", choiceNoteClicked);
-    console.log("Note was: ", this.state.oldNote);
+
+    // compare oldNote to what is picked for an answer
+    if (choiceNoteClicked === oldNote) {
+      score = score + 1;
+      this.setState({ score: score });
+    } else {
+      // Wrong answer
+    }
   };
 
   render() {
@@ -62,6 +75,8 @@ class Question extends Component {
         randomNote={this.state.randomNote}
         getRandomNotes={this.getRandomNotes}
         oldNote={this.state.oldNote}
+        score={this.state.score}
+        keysStyle={this.state.keysStyle}
       />
     );
   }

@@ -14,6 +14,7 @@ class Questions extends Component {
           style={this.props.style}
           getRandomNotes={this.props.getRandomNotes}
           randomNote={this.props.randomNote}
+          keysStyle={this.props.keysStyle}
         />
       </React.Fragment>
     );

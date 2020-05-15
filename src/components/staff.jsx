@@ -58,7 +58,7 @@ class Staff extends Component {
           {this.props.notesOnKeyBoardKeys.map((notesOnKeyBoardKey) => {
             return (
               <button
-                // oldNote={this.props.randomNote}
+                style={this.props.keysStyle}
                 key={notesOnKeyBoardKey}
                 id={notesOnKeyBoardKey}
                 onClick={() => {
