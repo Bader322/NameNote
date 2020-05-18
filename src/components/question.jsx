@@ -20,7 +20,7 @@ class Question extends Component {
       keysStyle: { display: "none" },
       oldNote: randN,
       score: 0,
-      
+      clef: "",
     };
   }
 
@@ -52,23 +52,26 @@ class Question extends Component {
     let { oldNote } = this.state;
     let score = this.state.score;
 
-    console.log("clicked: ", choiceNoteClicked);
+    // console.log("clicked: ", choiceNoteClicked);
 
     // compare oldNote to what is picked for an answer
     if (choiceNoteClicked === oldNote) {
-      this.setState({ score: score + 1 }, () =>
-        console.log("Score:", this.state.score)
-      );
-      console.log("Correct!");
+      this.setState({ score: score + 1 });
+      // console.log("Correct!");
     } else {
       // Wrong answer
-      console.log("Wrong answer!");
-      console.log("Score:", this.state.score);
+      // console.log("Wrong answer!");
+      // console.log("Score:", this.state.score);
     }
   };
-  componentDidUpdate(prevProps, prevState) {
-    console.log("prevState:", prevState);
-  }
+  clefChoice = (choice) => {
+    if (choice === "treble") {
+      this.setState({ clef: "treble" });
+    } else {
+      this.setState({ clef: "bass" });
+    }
+  };
+
   render() {
     return (
       <Questions
@@ -84,6 +87,7 @@ class Question extends Component {
         oldNote={this.state.oldNote}
         score={this.state.score}
         keysStyle={this.state.keysStyle}
+        clefChoice={this.clefChoice}
       />
     );
   }

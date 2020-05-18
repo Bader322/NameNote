@@ -16,7 +16,6 @@ class Staff extends Component {
     // Letter note
 
     // "/3", "/4", "/5", "/6" key mappings on staff
-    console.log("randomNote in draw : ", this.props.randomNote);
     let { keyMapper } = this.props;
     let nextNote = this.props.randomNote + keyMapper;
 
@@ -40,30 +39,43 @@ class Staff extends Component {
 
   render() {
     return (
-      <div>
-        <div className="board">
-          <button
-          className="btn btn-primary"
-            style={this.props.style}
-            id="playButton"
-            onClick={() => {
-              this.draw();
-              this.props.playButtonStyle();
-
-              // display buttons of choices
-            }}
-          >
-            NameNote
-          </button>
-          <div style={this.props.keysStyle}>
-            {" "}
-            <span className="badge badge-primary " id="outerLayer">
-              {" "}
-              Score:{" "}
-              <span className="badge badge-light"> {this.props.score}</span>
-            </span>{" "}
+      <div className="row">
+        <div className="col-md-12">
+          <div className="board">
+            <p style={this.props.style} className="badge" id="choiceAsk">
+              Choose a clef
+            </p>
           </div>
 
+          <div className="clefOptions" style={this.props.style}>
+            <span id="clefSymbol"> </span>
+            <button
+              className="btn btn-secondary"
+              onClick={() => {
+                this.props.playButtonStyle();
+                this.props.clefChoice();
+              }}
+            >
+              Treble Clef
+            </button>
+            <button
+              className="btn btn-secondary"
+              onClick={() => this.props.playButtonStyle()}
+            >
+              Bass Clef
+            </button>
+          </div>
+        </div>
+        {/* Score and letter notes */}
+        <div className="col-md-12 keyNotes">
+          <div style={this.props.keysStyle}>
+            <span className="badge" id="outerLayer">
+              Score
+              <span className="badge badge-light"> {this.props.score}</span>
+            </span>
+          </div>
+        </div>
+        <div className="col-md-12 keyNotes">
           {this.props.notesOnKeyBoardKeys.map((notesOnKeyBoardKey) => {
             return (
               <div key={notesOnKeyBoardKey}>

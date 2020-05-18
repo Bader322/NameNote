@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Counters from "./counters";
 import NavBar from "./navBar";
 import Question from "./question";
+import $ from "jquery";
 
 export default class main extends Component {
   state = {
@@ -71,10 +72,7 @@ export default class main extends Component {
   render() {
     return (
       <React.Fragment>
-         <NavBar
-          summedCounters={this.summedCounters()}
-          countersOn={this.countersOn()}
-        />
+        <NavBar />
 
         {/* // <Counters
           onReset={this.handleReset}
