@@ -16,7 +16,9 @@ class Questions extends Component {
           randomNote={this.props.randomNote}
           keysStyle={this.props.keysStyle}
           score={this.props.score}
-          clefChoice={this.props.clefChoice}
+          setTreble={this.props.setTreble}
+          setBass={this.props.setBass}
+          clef={this.props.clef}
         />
       </React.Fragment>
     );

@@ -57,19 +57,18 @@ class Question extends Component {
     // compare oldNote to what is picked for an answer
     if (choiceNoteClicked === oldNote) {
       this.setState({ score: score + 1 });
-      // console.log("Correct!");
+      console.log("Correct!");
     } else {
       // Wrong answer
-      // console.log("Wrong answer!");
+      console.log("Wrong answer!");
       // console.log("Score:", this.state.score);
     }
   };
-  clefChoice = (choice) => {
-    if (choice === "treble") {
-      this.setState({ clef: "treble" });
-    } else {
-      this.setState({ clef: "bass" });
-    }
+  setTreble = () => {
+    this.setState({ clef: "treble" });
+  };
+  setBass = () => {
+    this.setState({ clef: "bass" });
   };
 
   render() {
@@ -87,7 +86,9 @@ class Question extends Component {
         oldNote={this.state.oldNote}
         score={this.state.score}
         keysStyle={this.state.keysStyle}
-        clefChoice={this.clefChoice}
+        setTreble={this.setTreble}
+        setBass={this.setBass}
+        clef={this.state.clef}
       />
     );
   }

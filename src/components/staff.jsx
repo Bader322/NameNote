@@ -13,13 +13,11 @@ context.setFont("Arial", 10, "").setBackgroundFillStyle("#eed");
 
 class Staff extends Component {
   draw = () => {
+    context.clear();
     // Letter note
-
     // "/3", "/4", "/5", "/6" key mappings on staff
     let { keyMapper } = this.props;
     let nextNote = this.props.randomNote + keyMapper;
-
-    context.clear();
 
     const voice = new VF.Voice({ num_beats: 1, beat_value: 4 });
     voice.addTickables([new VF.StaveNote({ keys: [nextNote], duration: "q" })]);
@@ -30,7 +28,7 @@ class Staff extends Component {
     stave = new VF.Stave(10, 40, 400);
 
     // Add a clef and time signature.
-    stave.addClef("treble");
+    stave.addClef(this.props.clef);
     // Connect it to the rendering context and draw!
     stave.setContext(context).draw();
     voice.draw(context, stave);
@@ -40,27 +38,30 @@ class Staff extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-md-12">
+        <div className="col-md-12" id="topCol" style={this.props.style}>
           <div className="board">
-            <p style={this.props.style} className="badge" id="choiceAsk">
+            <p className="badge" id="choiceAsk">
               Choose a clef
             </p>
           </div>
 
-          <div className="clefOptions" style={this.props.style}>
+          <div className="clefOptions">
             <span id="clefSymbol"> </span>
             <button
               className="btn btn-secondary"
               onClick={() => {
                 this.props.playButtonStyle();
-                this.props.clefChoice();
+                this.props.setTreble();
               }}
             >
               Treble Clef
             </button>
             <button
               className="btn btn-secondary"
-              onClick={() => this.props.playButtonStyle()}
+              onClick={() => {
+                this.props.playButtonStyle();
+                this.props.setBass();
+              }}
             >
               Bass Clef
             </button>
