@@ -15,7 +15,7 @@
     "react": "^16.13.1",
     "react-abc": "^0.4.0",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
+    "react-scripts": "5.0.1",
     "react-vexflow": "0.0.4",
     "typescript": "^3.8.3",
     "vexflow": "^3.0.9"
